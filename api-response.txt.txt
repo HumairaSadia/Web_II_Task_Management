@@ -1,0 +1,8 @@
+http://localhost:3000/task/3
+{"id":3,"title":"POST request","completed":false,"createdAt":"2025-11-17T00:00:00.000Z"}
+
+http://localhost:3000/task/999
+{"error":"Task not found"}
+
+http://localhost:3000/task/abc
+{"error":"Invalid ID format"}

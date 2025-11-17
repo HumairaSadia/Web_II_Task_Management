@@ -1,21 +1,48 @@
 const express = require('express');
 const router = express.Router();
 
-const tasks = [
-  { id: 1, title: 'Learn Node.js', completed: true, priority: 'high', createdAt: '30-10-2025' },
-  { id: 2, title: 'Build REST API', completed: false, priority: 'high', createdAt: '31-10-2025' },
-  { id: 3, title: 'Test API', completed: true, priority: 'low', createdAt: '01-11-2025' },
-  { id: 4, title: 'Push in Github', completed: true, priority: 'medium', createdAt: '02-11-2025' },
-  { id: 5, title: 'Create final Project', completed: false, priority: 'medium', createdAt: '03-11-2025' }
-];
+// GET /tasks - Retrieve all tasks
+router.get('/', (req, res) => {
+  const tasks = req.app.locals.tasks;
+  res.status(200).json({
+    success: true,
+    data: tasks
+  });
+});
+// POST /tasks - Create a new task
+router.post('/', (req, res) => {
+  try {
+    const { title } = req.body;
 
-router.get('/', (req, res) => res.json(tasks));
+    // Input validation
+    if (!title || typeof title !== 'string' || title.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Title is required and must be a non-empty string'
+      });
+    }
 
-router.get('/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const task = tasks.find(t => t.id === id);
-  if (task) res.json(task);
-  else res.status(404).json({ error: 'Task not found' });
+    const newTask = {
+      id: Date.now(), // Simple ID (replace with auto-increment in DB)
+      title: title.trim(),
+      completed: false
+    };
+
+    const tasks = req.app.locals.tasks;
+    tasks.push(newTask);
+
+    res.status(201).json({
+      success: true,
+      data: newTask
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
 });
 
-module.exports = router; 
+
+
+module.exports = router;
