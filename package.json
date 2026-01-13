@@ -1,21 +1,23 @@
 {
   "name": "task-management",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "CSE 362 Web Programming II Lab 07 - Task Management API",
+  "main": "server.js",
   "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Humaira Sadia",
+  "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^4.22.1",
     "mysql2": "^3.16.0",
-    "sequelize": "^6.37.7",
-    "sequelize-cli": "^6.6.3"
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/HumairaSadia/Web_II_Task_Management/issues"
   },
-  "homepage": "https://github.com/HumairaSadia/Web_II_Task_Management#readme"
+  "homepage": "https://github.com/HumairaSadia/Web_II_Task_Management#readme",
+  "keywords": []
 }

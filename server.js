@@ -1,15 +1,7 @@
-const express = require('express');
-const app = express();
-app.use(express.json());
+require('dotenv').config();
+const app = require('./src/app');
+const PORT = process.env.PORT || 3000;
 
-const taskRoutes = require('./src/routes/tasks'); 
-app.use('/tasks', taskRoutes);
-
-// Optional: test DB connection
-const db = require('./models'); 
-db.sequelize.authenticate()
-  .then(() => console.log('Database connected'))
-  .catch(err => console.error('DB connection error:', err));
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
